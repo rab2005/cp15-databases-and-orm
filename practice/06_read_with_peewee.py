@@ -30,6 +30,8 @@ class Customer(Model):
     class Meta:
         database = db
     
+    def get_info():
+        return 
 db.connect()
 db.create_tables([Customer])
 
@@ -57,10 +59,12 @@ if Customer.select().count() == 0:
 # Use Customer.select() to get all the customers in your database. Then loop
 # through them and print out their name and birth year
 
+all_customers = Customer.select()
 
-
+for cust_obj in all_customers:
+    print(f"{cust_obj.name}: {cust_obj.email}")
 # 3. EXTEND YOUR CUSTOMER CLASS
-# In your customer class, write a method called `get_info` that returns a
+# In your customer class, write a method called`get_info` that returns a
 # string like this:
 # Customer 1's data: Name: John | Email: example@gmail.com | Birth Year: 2000 | State: Utah
 # then call that method on each of the customers in your table.

@@ -41,6 +41,7 @@ it is more justifiable.
 # This will give you access to everything inside of the peewee library without
 # needing to type out peewee. before everything. But to start out, we might
 # just import peewee to show where everything is coming from.
+import peewee as p
 
 
 
@@ -48,9 +49,26 @@ it is more justifiable.
 # Connect to your database. In this case, we'll create a new one called
 # customers.db
 
+db = p.SqliteDatabase("customers.db")
 
+class Customer(p.Model):
+    id_customer = p.AutoField(primary_key=True)
+    name = p.CharField
+    email = p.CharField(null=True)
+    birth_year = p.IntegerField
+    state = p.CharField(default="TX")
+    
+    #connect to db
+    class Meta:
+        database = db
 
+db.connect()
 
+db.create_tables([Customer])
+
+cust_obj = Customer.create(name="La Nan", email="lanaster@gmail.com", birth_year=1978, state='TX')
+
+print(cust_obj.name)
 # 3. CREATE YOUR ORM MODEL FOR THE CUSTOMER TABLE
 # Create a Customer class. This will need to inherit from peewee's class Base.
 # You want your customer table to have the following fields (columns), so they

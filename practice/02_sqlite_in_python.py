@@ -10,3 +10,11 @@ clear_screen()
 # the result and print out each row.
 
 
+import sqlite3
+
+conn = sqlite3.connect("books.db")
+
+result = conn.execute("select * from author")
+
+for x in result:
+    print(x)
